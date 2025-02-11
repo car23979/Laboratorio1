@@ -42,7 +42,9 @@ SETUP:
 
 // Loop Infinito
 MAIN:
-	CALL CONTADOR_1 // Llamar la subrutina del contador 1  
+	CALL CONTADOR_1 // Llamar la subrutina del contador 1
+	CALL CONTADOR_2 // Llamar la subrutina del contador 2
+	RJMP MAIN		// Repetir ciclo 
 	/*IN R16, PINC	// Leer estadode botones
 	CP R17, R16		// Comparar con estado previo
 	BREQ MAIN		// Si no hay cambio, vuelve a leer

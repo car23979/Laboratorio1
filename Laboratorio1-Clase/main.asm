@@ -35,9 +35,10 @@ SETUP:
 	OUT PORTD, R16	// Todos los bits del puerto D se encuentran apagados
 
 	// Inicializar variables
-	LDI R17, 0x7F	// Variable que guarda el estado de los botones
-	LDI R18, 0x00	// Contador 1 incialización en 0
-	LDI R19, 0x00	// Contador 2
+	LDI R17, 0x7F	// Guarda el estado anterior de los botones (contador 1)
+	LDI R18, 0x00	// Valor del contador 1
+	LDI R19, 0xFF	// Guarda el estado anterior de los botones (contador 2)
+	LDI R20, 0x00	// Valor del contador 2
 
 // Loop Infinito
 MAIN:

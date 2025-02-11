@@ -34,13 +34,15 @@ SETUP:
 	OUT PORTB, R16	// Todos los bits del puerto B se encuentran apagados
 	OUT PORTD, R16	// Todos los bits del puerto D se encuentran apagados
 
+	// Inicializar variables
 	LDI R17, 0x7F	// Variable que guarda el estado de los botones
 	LDI R18, 0x00	// Contador 1 incialización en 0
 	LDI R19, 0x00	// Contador 2
 
 // Loop Infinito
 MAIN:
-	IN R16, PINC	// Leer estadode botones
+	CALL CONTADOR_1 // Llamar la subrutina del contador 1  
+	/*IN R16, PINC	// Leer estadode botones
 	CP R17, R16		// Comparar con estado previo
 	BREQ MAIN		// Si no hay cambio, vuelve a leer
 	

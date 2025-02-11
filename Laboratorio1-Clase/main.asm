@@ -48,7 +48,7 @@ MAIN:
 	
 // Subrutina para el contador 1 (PC0 y PC1)
 CONTADOR_1:
-	/*IN R16, PINC	// Leer estadode botones
+	IN R16, PINC	// Leer estadode botones
 	CP R17, R16		// Comparar con estado previo
 	BREQ MAIN		// Si no hay cambio, vuelve a leer
 	

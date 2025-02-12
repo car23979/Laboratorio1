@@ -51,13 +51,14 @@ CONTADOR_1:
 	IN R16, PINC	// Leer estados de botones
 	ANDI R16, 0x03	// Máscara para PC0 y PC1
 	CP R17, R16		// Comparar con estado previo
-	BREQ MAIN		// Si no hay cambio, vuelve a leer
+	BREQ CONTADOR_1		// Si no hay cambio, vuelve a leer
 	
 	CALL DELAY		// Retardo para antirrebote
 	
 	IN R16, PINC	// Leer estadode botones
+	ANDI R16, 0x03	// Máscara para PC0 y PC1
 	CP R17, R16		// Comparar con estado previo
-	BREQ MAIN		// Si no hay cambio, vuelve a leer
+	BREQ CONTADOR_1		// Si no hay cambio, vuelve a leer
 
 	MOV R17, R16	// Guardar copia de estado actual
 	SBRS R16, 0		// Revisar si el bit 2 no se presiono

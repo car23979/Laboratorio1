@@ -96,7 +96,7 @@ CONTADOR_2:
 FIN_CONTADOR2:
 	RET				// Regresa a Main
 
-
+// Logica Contador 1
 // Subrutina para incrementar el contador
 INCREMENT1:
 	INC R18			// Incrementra contador

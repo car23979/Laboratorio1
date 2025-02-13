@@ -95,6 +95,13 @@ DECREMENT1:
 	BRNE NO_BORROW1	// Si no hubo borrow
 	LDI R18, 0x0F	// Si hubo borrow, el contador 1 decrementa
 NO_BORROW1:
+	MOV R22, R18	// Se guarda en otro registro para poder modificarlo
+	LSL R22			// Se corre R18 4 espacios
+	LSL R22
+	LSL R22
+	LSL R22
+	OR	R22, R20	// Unir con el contador 2
+	OUT PORTD, R22	// Mostrar en LEDs
 	RET
 
 // Logica Contador 2

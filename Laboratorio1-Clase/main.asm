@@ -39,6 +39,7 @@ SETUP:
 	LDI R18, 0x00	// Valor del contador 1
 	LDI R19, 0x7F	// Guarda el estado anterior de los botones (contador 2)
 	LDI R20, 0x00	// Valor del contador 2
+	CLR R23			// Valor del sumador
 
 // Loop Infinito
 MAIN:
@@ -125,6 +126,16 @@ DECREMENT2:
 NO_BORROW2:
 	MOV R22, R20	// Se guarda en otro registro para poder modificarlo
 	OUT PORTD, R22	// Mostrar en LEDs
+	RET
+
+// Subrutina para el botón de sumador
+SUMA:
+	MOV R23, R18	// Se guarda en otro registro para modificarlo
+	ADD R23, R20	// Se suman los registros
+	CPI R23, 0X10	// Comprobar si se genero Carry
+	BRNE NO_CARRYS	// Si no hubo overflow, continuar
+	LDI R23, 0X10	// Encender PB4 si hay overflow
+	OUT PORTB, R23	// Mostrar en LEDs
 	RET
 
 // Subrutina de retardo para antirrebote

@@ -70,7 +70,7 @@ CONTADOR_1:
 	RJMP MAIN		// Repetir el ciclo
 
 // Subrutina para incrementar el contador
-INCREMENT:
+INCREMENT1:
 	INC R18			// Incrementra contador
 	CPI R18, 0x10 
 	BRNE NO_CARRY	// Si no hubo overflow, continuar
@@ -79,7 +79,7 @@ NO_CARRY:
 	RET
 
 // Subrutina para decrementar el contador
-DECREMENT:
+DECREMENT1:
 	DEC R18			// Decrementar contador
 	CPI R18, 0xFF	// Comprobar si se generó borrow
 	BRNE NO_BORROW	// Si no hubo borrow

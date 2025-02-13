@@ -51,7 +51,7 @@ CONTADOR_1:
 	IN R16, PINC	// Leer estados de botones
 	ANDI R16, 0x03	// Máscara para PC0 y PC1
 	CP R17, R16		// Comparar con estado previo
-	BREQ CONTADOR_1		// Si no hay cambio, vuelve a leer
+	BREQ CONTADOR_1	// Si no hay cambio, vuelve a leer
 	
 	CALL DELAY		// Retardo para antirrebote
 	
@@ -62,14 +62,40 @@ CONTADOR_1:
 
 	MOV R17, R16	// Guardar copia de estado actual
 	SBRS R16, 0		// Revisar si PC0 no se presiono
-	CALL INCREMENT1	// Llamar subrutina de incremento1
+	CALL INCREMENT1	// Llamar subrutina de incremento 1
 	SBRS R16, 1		// Si PC1 se presiono
-	CALL DECREMENT1	// Llamar subrutina de decremento1
+	CALL DECREMENT1	// Llamar subrutina de decremento 1
 
 	OUT PORTB, R18	// Mostrar el contador en los LEDs
 
 FIN_CONTADOR1:
 	RET				// Regresa a Main
+
+// Subrutina para el contador 2 (PC2 y PC3)
+CONTADOR_2:
+	IN R16, PINC	// Leer estados de botones
+	ANDI R16, 0x03	// Máscara para PC2 y PC3
+	CP R19, R16		// Compara con estado previo
+	BREQ CONTADOR_2 // Si no hay cambio, vuelve a leer
+
+	CALL DELAY		// Retardo para antirrebote
+
+	IN R16, PINC	// Leer estados de botones
+	ANDI R16, 0x03	// Máscara para PC2 y PC3
+	CP R19, R16		// Compara con estado previo
+	BREQ CONTADOR_2 // Si no hay cambio, vuelve a leer
+
+	MOV R19, R16	// Guardar copia de estado actual
+	SBRS R16, 2		// Si PC2 se presiono
+	CALL INCREMENT2 // Llamar subrutina de incremento 2
+	SBRS R16, 3		// Revisar si PC3 no se presiono
+	CALL DECREMENT2	// Llamar subrutina de decremento 2
+
+	OUT PORTD, R20	// Mostrar el contador en los LEDs
+
+FIN_CONTADOR2:
+	RET				// Regresa a Main
+
 
 // Subrutina para incrementar el contador
 INCREMENT1:

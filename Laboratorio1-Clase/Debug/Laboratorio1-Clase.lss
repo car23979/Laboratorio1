@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm Thu Feb 13 13:18:24 2025
+AVRASM ver. 2.2.8  C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm Thu Feb 13 13:45:20 2025
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.inc'
@@ -1059,7 +1059,7 @@ C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Inc
                                  
                                  	// PORTB y PORTD se configura como salidas inicialmente apagado
 000008 ef0f                      	LDI R16, 0xFF
-000009 b904                      	OUT DDRB, R16	// Se establece el puerto B como salida (contador 1)
+000009 b904                      	OUT DDRB, R16	// Se establece el puerto B como sumador
 00000a b90a                      	OUT DDRD, R16	// Se establece el puerto D como salida (contador 2)
 00000b e000                      	LDI R16, 0X00
 00000c b905                      	OUT PORTB, R16	// Todos los bits del puerto B se encuentran apagados
@@ -1079,28 +1079,28 @@ C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Inc
 000014 1710                      	CP R17, R16		// Comparar con estado previo
 000015 f3e9                      	BREQ MAIN	// Si no hay cambio, vuelve a leer
                                  	
-000016 940e 0057                 	CALL DELAY		// Retardo para antirrebote
+000016 940e 005d                 	CALL DELAY		// Retardo para antirrebote
                                  	
 000018 b106                      	IN R16, PINC	// Leer estadode botones
 000019 1710                      	CP R17, R16		// Comparar con estado previo
 00001a f3c1                      	BREQ MAIN		// Si no hay cambio, vuelve a leer
                                  	
-00001b 940e 0057                 	CALL DELAY		// Retardo para antirrebote
+00001b 940e 005d                 	CALL DELAY		// Retardo para antirrebote
                                  
 00001d 2f10                      	MOV R17, R16	// Guardar copia de estado actual
 00001e ff00                      	SBRS R16, 0		// Revisar si PC0 no se presiono
 00001f 940e 002e                 	CALL INCREMENT1	// Llamar subrutina de incremento 1
 000021 ff01                      	SBRS R16, 1		// Si PC1 se presiono
-000022 940e 0037                 	CALL DECREMENT1	// Llamar subrutina de decremento 1
+000022 940e 003a                 	CALL DECREMENT1	// Llamar subrutina de decremento 1
 000024 ff02                      	SBRS R16, 2		// Si PC2 se presiono
-000025 940e 0040                 	CALL INCREMENT2 // Llamar subrutina de incremento 2
+000025 940e 0046                 	CALL INCREMENT2 // Llamar subrutina de incremento 2
 000027 ff03                      	SBRS R16, 3		// Revisar si PC3 no se presiono
-000028 940e 0047                 	CALL DECREMENT2	// Llamar subrutina de decremento 2
+000028 940e 004d                 	CALL DECREMENT2	// Llamar subrutina de decremento 2
                                  
                                  	// Verificar el botón de suma
 00002a 9b34                      	SBIS PINC, 4	// Revisar si PC4 no se presiono
                                  
-00002b 940e 004e                 	CALL SUMA		// Se llama a la subrutina de suma
+00002b 940e 0054                 	CALL SUMA		// Se llama a la subrutina de suma
                                  
 00002d cfe5                      	RJMP MAIN
                                  
@@ -1112,83 +1112,89 @@ C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Inc
 000031 e020                      	LDI	R18, 0x00	// Si hubo carry, reiniciar contador 1 a 0
                                  NO_CARRY1:
 000032 2f62                      	MOV R22, R18	// Se guarda en otro registro para poder modificarlo
-000033 9562                      	SWAP R22			// Se corre R18 4 espacios
-000034 2b64                      	OR	R22, R20	// Unir con el contador 2
-000035 b96b                      	OUT PORTD, R22	// Mostrar en LEDs
-000036 9508                      	RET
+000033 0f66                      	LSL R22			// Se corre R18 4 espacios
+000034 0f66                      	LSL R22
+000035 0f66                      	LSL R22
+000036 0f66                      	LSL R22
+000037 2b64                      	OR	R22, R20	// Unir con el contador 2
+000038 b96b                      	OUT PORTD, R22	// Mostrar en LEDs
+000039 9508                      	RET
                                  
                                  // Subrutina para decrementar el contador 1
                                  DECREMENT1:
-000037 952a                      	DEC R18			// Decrementar contador 1
-000038 3f2f                      	CPI R18, 0xFF	// Comprobar si se generó borrow
-000039 f409                      	BRNE NO_BORROW1	// Si no hubo borrow
-00003a e02f                      	LDI R18, 0x0F	// Si hubo borrow, el contador 1 decrementa
+00003a 952a                      	DEC R18			// Decrementar contador 1
+00003b 3f2f                      	CPI R18, 0xFF	// Comprobar si se generó borrow
+00003c f409                      	BRNE NO_BORROW1	// Si no hubo borrow
+00003d e02f                      	LDI R18, 0x0F	// Si hubo borrow, el contador 1 decrementa
                                  NO_BORROW1:
-00003b 2f62                      	MOV R22, R18	// Se guarda en otro registro para poder modificarlo
-00003c 9562                      	SWAP R22			// Se corre R18 4 espacios
-00003d 2b64                      	OR	R22, R20	// Unir con el contador 2
-00003e b96b                      	OUT PORTD, R22	// Mostrar en LEDs
-00003f 9508                      	RET
+00003e 2f62                      	MOV R22, R18	// Se guarda en otro registro para poder modificarlo
+00003f 0f66                      	LSL R22			// Se corre R18 4 espacios
+000040 0f66                      	LSL R22
+000041 0f66                      	LSL R22
+000042 0f66                      	LSL R22
+000043 2b64                      	OR	R22, R20	// Unir con el contador 2
+000044 b96b                      	OUT PORTD, R22	// Mostrar en LEDs
+000045 9508                      	RET
                                  
                                  // Logica Contador 2
                                  // Subrutina para incrementar el contador 2
                                  INCREMENT2:
-000040 9543                      	INC R20			// Incrementra contador 2
-000041 3140                      	CPI R20, 0x10 
-000042 f409                      	BRNE NO_CARRY2	// Si no hubo overflow, continuar
-000043 e040                      	LDI	R20, 0x00	// Si hubo carry, reiniciar contador 2 a 0
+000046 9543                      	INC R20			// Incrementra contador 2
+000047 3140                      	CPI R20, 0x10 
+000048 f409                      	BRNE NO_CARRY2	// Si no hubo overflow, continuar
+000049 e040                      	LDI	R20, 0x00	// Si hubo carry, reiniciar contador 2 a 0
                                  NO_CARRY2:
-000044 2f64                      	MOV R22, R20	// Se guarda en otro registro para poder modificarlo
-000045 b96b                      	OUT PORTD, R22	// Mostrar en LEDs
-000046 9508                      	RET
+00004a 2f64                      	MOV R22, R20	// Se guarda en otro registro para poder modificarlo
+00004b b96b                      	OUT PORTD, R22	// Mostrar en LEDs
+00004c 9508                      	RET
                                  
                                  // Subrutina para decrementar el contador 2
                                  DECREMENT2:
-000047 954a                      	DEC R20			// Decrementar contador 2
-000048 3f4f                      	CPI R20, 0xFF	// Comprobar si se generó borrow
-000049 f409                      	BRNE NO_BORROW2	// Si no hubo borrow
-00004a e04f                      	LDI R20, 0x0F	// Si hubo borrow, el contador 2 decrementa
+00004d 954a                      	DEC R20			// Decrementar contador 2
+00004e 3f4f                      	CPI R20, 0xFF	// Comprobar si se generó borrow
+00004f f409                      	BRNE NO_BORROW2	// Si no hubo borrow
+000050 e04f                      	LDI R20, 0x0F	// Si hubo borrow, el contador 2 decrementa
                                  NO_BORROW2:
-00004b 2f64                      	MOV R22, R20	// Se guarda en otro registro para poder modificarlo
-00004c b96b                      	OUT PORTD, R22	// Mostrar en LEDs
-00004d 9508                      	RET
+000051 2f64                      	MOV R22, R20	// Se guarda en otro registro para poder modificarlo
+000052 b96b                      	OUT PORTD, R22	// Mostrar en LEDs
+000053 9508                      	RET
                                  
                                  // Subrutina para el botón de sumador
                                  SUMA:
-00004e 2f72                      	MOV R23, R18	// Se guarda en otro registro para modificarlo
-00004f 0f74                      	ADD R23, R20	// Se suman los registros
-000050 3170                      	CPI R23, 0X10	// Comprobar si se genero Carry
-000051 f419                      	BRNE NO_CARRYS	// Si no hubo overflow, continuar
-000052 e170                      	LDI R23, 0X10	// Encender PB4 si hay overflow
-000053 b975                      	OUT PORTB, R23	// Mostrar en LEDs
-000054 9508                      	RET
+000054 2f72                      	MOV R23, R18	// Se guarda en otro registro para modificarlo
+000055 0f74                      	ADD R23, R20	// Se suman los registros
+000056 3170                      	CPI R23, 0X10	// Comprobar si se genero Carry
+000057 f419                      	BRNE NO_CARRYS	// Si no hubo overflow, continuar
+000058 e170                      	LDI R23, 0X10	// Encender PB4 si hay overflow
+000059 b975                      	OUT PORTB, R23	// Mostrar en LEDs
+00005a 9508                      	RET
                                  NO_CARRYS:
-000055 b975                      	OUT PORTB, R23	// Mostrar resultado
-000056 9508                      	RET
+00005b b975                      	OUT PORTB, R23	// Mostrar resultado
+00005c 9508                      	RET
                                  
                                  // Subrutina de retardo para antirrebote
                                  DELAY:
-000057 ef5f                      	LDI R21, 0xFF
+00005d ef5f                      	LDI R21, 0xFF
                                  SUB_DELAY1:
-000058 955a                      	DEC R21
-000059 3050                      	CPI R21, 0
-00005a f7e9                      	BRNE SUB_DELAY1
-00005b ef5f                      	LDI R21, 0xFF
+00005e 955a                      	DEC R21
+00005f 3050                      	CPI R21, 0
+000060 f7e9                      	BRNE SUB_DELAY1
+000061 ef5f                      	LDI R21, 0xFF
                                  SUB_DELAY2:
-00005c 955a                      	DEC R21
-00005d 3050                      	CPI R21, 0
-00005e f7e9                      	BRNE SUB_DELAY2
-00005f ef5f                      	LDI R21, 0xFF
+000062 955a                      	DEC R21
+000063 3050                      	CPI R21, 0
+000064 f7e9                      	BRNE SUB_DELAY2
+000065 ef5f                      	LDI R21, 0xFF
                                  SUB_DELAY3:
-000060 955a                      	DEC R21
-000061 3050                      	CPI R21, 0
-000062 f7e9                      	BRNE SUB_DELAY3
-000063 ef5f                      	LDI R21, 0xFF
+000066 955a                      	DEC R21
+000067 3050                      	CPI R21, 0
+000068 f7e9                      	BRNE SUB_DELAY3
+000069 ef5f                      	LDI R21, 0xFF
                                  SUB_DELAY4:
-000064 955a                      	DEC R21
-000065 3050                      	CPI R21, 0
-000066 f7e9                      	BRNE SUB_DELAY4
-000067 9508                      	RET
+00006a 955a                      	DEC R21
+00006b 3050                      	CPI R21, 0
+00006c f7e9                      	BRNE SUB_DELAY4
+00006d 9508                      	RET
                                  /*	LDI R19, 0xFF
                                  SUB_DELAY5:
                                  	DEC R19
@@ -1220,7 +1226,7 @@ counted separately from r26..r31 here.
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
 r13:   0 r14:   0 r15:   0 r16:  23 r17:   4 r18:  10 r19:   1 r20:  12 
-r21:  12 r22:  12 r23:   7 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r21:  12 r22:  18 r23:   7 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
 Registers used: 8 out of 35 (22.9%)
 
@@ -1235,7 +1241,7 @@ clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   1 cls   :   0
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   2 cpc   :   0 
 cpi   :   9 cpse  :   0 dec   :   6 eor   :   0 fmul  :   0 fmuls :   0 
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   2 inc   :   2 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :  19 lds   :   0 lpm   :   0 lsl   :   0 
+ld    :   0 ldd   :   0 ldi   :  19 lds   :   0 lpm   :   0 lsl   :   8 
 lsr   :   0 mov   :   6 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :   0 or    :   2 ori   :   0 out   :  14 pop   :   0 
 push  :   0 rcall :   0 ret   :   7 reti  :   0 rjmp  :   1 rol   :   0 
@@ -1243,13 +1249,13 @@ ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   1
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   4 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   0 
-sub   :   0 subi  :   0 swap  :   2 tst   :   0 wdr   :   0 
+sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
 Instructions used: 19 out of 113 (16.8%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0000d0    208      0    208   32768   0.6%
+[.cseg] 0x000000 0x0000dc    220      0    220   32768   0.7%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

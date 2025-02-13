@@ -25,20 +25,20 @@
  <LABELS>
   <SETUP><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>21</LINE></SETUP>
   <MAIN><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>45</LINE></MAIN>
-  <DELAY><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>139</LINE></DELAY>
+  <DELAY><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>145</LINE></DELAY>
   <INCREMENT1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>77</LINE></INCREMENT1>
-  <DECREMENT1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>90</LINE></DECREMENT1>
-  <INCREMENT2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>104</LINE></INCREMENT2>
-  <DECREMENT2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>115</LINE></DECREMENT2>
-  <SUMA><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>126</LINE></SUMA>
+  <DECREMENT1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>93</LINE></DECREMENT1>
+  <INCREMENT2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>110</LINE></INCREMENT2>
+  <DECREMENT2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>121</LINE></DECREMENT2>
+  <SUMA><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>132</LINE></SUMA>
   <NO_CARRY1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>82</LINE></NO_CARRY1>
-  <NO_BORROW1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>95</LINE></NO_BORROW1>
-  <NO_CARRY2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>109</LINE></NO_CARRY2>
-  <NO_BORROW2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>120</LINE></NO_BORROW2>
-  <NO_CARRYS><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>134</LINE></NO_CARRYS>
-  <SUB_DELAY1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>141</LINE></SUB_DELAY1>
-  <SUB_DELAY2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>146</LINE></SUB_DELAY2>
-  <SUB_DELAY3><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>151</LINE></SUB_DELAY3>
-  <SUB_DELAY4><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>156</LINE></SUB_DELAY4>
+  <NO_BORROW1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>98</LINE></NO_BORROW1>
+  <NO_CARRY2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>115</LINE></NO_CARRY2>
+  <NO_BORROW2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>126</LINE></NO_BORROW2>
+  <NO_CARRYS><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>140</LINE></NO_CARRYS>
+  <SUB_DELAY1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>147</LINE></SUB_DELAY1>
+  <SUB_DELAY2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>152</LINE></SUB_DELAY2>
+  <SUB_DELAY3><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>157</LINE></SUB_DELAY3>
+  <SUB_DELAY4><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>162</LINE></SUB_DELAY4>
  </LABELS>
 </ASSEMBLER_INFO>

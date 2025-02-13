@@ -28,7 +28,7 @@ SETUP:
 
 	// PORTB y PORTD se configura como salidas inicialmente apagado
 	LDI R16, 0xFF
-	OUT DDRB, R16	// Se establece el puerto B como salida (contador 1)
+	OUT DDRB, R16	// Se establece el puerto B como sumador
 	OUT DDRD, R16	// Se establece el puerto D como salida (contador 2)
 	LDI R16, 0X00
 	OUT PORTB, R16	// Todos los bits del puerto B se encuentran apagados

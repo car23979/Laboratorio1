@@ -137,6 +137,9 @@ SUMA:
 	LDI R23, 0X10	// Encender PB4 si hay overflow
 	OUT PORTB, R23	// Mostrar en LEDs
 	RET
+NO_CARRYS:
+	OUT PORTB, R23	// Mostrar resultado
+	RET
 
 // Subrutina de retardo para antirrebote
 DELAY:

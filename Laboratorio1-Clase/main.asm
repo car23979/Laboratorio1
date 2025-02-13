@@ -66,16 +66,12 @@ MAIN:
 	CALL DECREMENT2	// Llamar subrutina de decremento 2
 
 	// Verificar el botón de suma
-	SBRS PINC, 4
+	SBRS PINC, 4	// Revisar si PC4 no se presiono
 
 	CALL SUMA		// Se llama a la subrutina de suma
 
 	RJMP MAIN
 
-FIN_CONTADOR2:
-	RET				// Regresa a Main
-
-// Logica Contador 1
 // Subrutina para incrementar el contador 1
 INCREMENT1:
 	INC R18			// Incrementra contador 1
@@ -83,6 +79,13 @@ INCREMENT1:
 	BRNE NO_CARRY1	// Si no hubo overflow, continuar
 	LDI	R18, 0x00	// Si hubo carry, reiniciar contador 1 a 0
 NO_CARRY1:
+	MOV R22, R18	// Se guarda en otro registro para poder modificarlo
+	LSL R22			// Se corre R18 4 espacios
+	LSL R22
+	LSL R22
+	LSL R22
+	OR	R22, R20	// Unir con el contador 2
+	OUT PORTD, R22	// Mostrar en LEDs
 	RET
 
 // Subrutina para decrementar el contador 1

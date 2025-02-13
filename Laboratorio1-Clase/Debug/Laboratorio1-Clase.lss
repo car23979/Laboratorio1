@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm Thu Feb 13 10:28:09 2025
+AVRASM ver. 2.2.8  C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm Thu Feb 13 10:36:59 2025
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.inc'
@@ -1105,14 +1105,14 @@ C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Inc
                                  // Subrutina para el contador 2 (PC2 y PC3)
                                  CONTADOR_2:
 00002a b106                      	IN R16, PINC	// Leer estados de botones
-00002b 7003                      	ANDI R16, 0x03	// Máscara para PC2 y PC3
+00002b 700c                      	ANDI R16, 0x0C	// Máscara para PC2 y PC3
 00002c 1730                      	CP R19, R16		// Compara con estado previo
 00002d f3e1                      	BREQ CONTADOR_2 // Si no hay cambio, vuelve a leer
                                  
 00002e 940e 0051                 	CALL DELAY		// Retardo para antirrebote
                                  
 000030 b106                      	IN R16, PINC	// Leer estados de botones
-000031 7003                      	ANDI R16, 0x03	// Máscara para PC2 y PC3
+000031 700c                      	ANDI R16, 0x0C	// Máscara para PC2 y PC3
 000032 1730                      	CP R19, R16		// Compara con estado previo
 000033 f3b1                      	BREQ CONTADOR_2 // Si no hay cambio, vuelve a leer
                                  
@@ -1172,7 +1172,7 @@ C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Inc
 000052 955a                      	DEC R21
 000053 3050                      	CPI R21, 0
 000054 f7e9                      	BRNE SUB_DELAY1
-000055 ef4f                      	LDI R20, 0xFF
+000055 ef5f                      	LDI R21, 0xFF
                                  SUB_DELAY2:
 000056 955a                      	DEC R21
 000057 3050                      	CPI R21, 0
@@ -1218,8 +1218,8 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  32 r17:   4 r18:   8 r19:   4 r20:   9 
-r21:  11 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16:  32 r17:   4 r18:   8 r19:   4 r20:   8 
+r21:  12 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
 Registers used: 6 out of 35 (17.1%)
 

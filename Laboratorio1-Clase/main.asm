@@ -123,6 +123,8 @@ DECREMENT2:
 	BRNE NO_BORROW2	// Si no hubo borrow
 	LDI R20, 0x0F	// Si hubo borrow, el contador 2 decrementa
 NO_BORROW2:
+	MOV R22, R20	// Se guarda en otro registro para poder modificarlo
+	OUT PORTD, R22	// Mostrar en LEDs
 	RET
 
 // Subrutina de retardo para antirrebote

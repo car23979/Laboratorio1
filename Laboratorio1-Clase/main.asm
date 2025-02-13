@@ -118,19 +118,19 @@ NO_BORROW1:
 // Logica Contador 2
 // Subrutina para incrementar el contador 2
 INCREMENT2:
-	INC R18			// Incrementra contador 2
-	CPI R18, 0x10 
+	INC R20			// Incrementra contador 2
+	CPI R20, 0x10 
 	BRNE NO_CARRY2	// Si no hubo overflow, continuar
-	LDI	R18, 0x00	// Si hubo carry, reiniciar contador 2 a 0
+	LDI	R20, 0x00	// Si hubo carry, reiniciar contador 2 a 0
 NO_CARRY2:
 	RET
 
 // Subrutina para decrementar el contador 2
 DECREMENT2:
-	DEC R18			// Decrementar contador 2
-	CPI R18, 0xFF	// Comprobar si se generó borrow
+	DEC R20			// Decrementar contador 2
+	CPI R20, 0xFF	// Comprobar si se generó borrow
 	BRNE NO_BORROW2	// Si no hubo borrow
-	LDI R18, 0x0F	// Si hubo borrow, el contador 2 decrementa
+	LDI R20, 0x0F	// Si hubo borrow, el contador 2 decrementa
 NO_BORROW2:
 	RET
 

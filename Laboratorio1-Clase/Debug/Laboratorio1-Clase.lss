@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm Thu Feb 13 02:59:58 2025
+AVRASM ver. 2.2.8  C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm Thu Feb 13 03:06:09 2025
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.inc'
@@ -1068,7 +1068,7 @@ C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Inc
                                  	// Inicializar variables
 00000e e71f                      	LDI R17, 0x7F	// Guarda el estado anterior de los botones (contador 1)
 00000f e020                      	LDI R18, 0x00	// Valor del contador 1
-000010 ef3f                      	LDI R19, 0xFF	// Guarda el estado anterior de los botones (contador 2)
+000010 e73f                      	LDI R19, 0x7F	// Guarda el estado anterior de los botones (contador 2)
 000011 e040                      	LDI R20, 0x00	// Valor del contador 2
                                  
                                  // Loop Infinito
@@ -1167,25 +1167,25 @@ C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Inc
                                  
                                  // Subrutina de retardo para antirrebote
                                  DELAY:
-000051 ef4f                      	LDI R20, 0xFF
+000051 ef5f                      	LDI R21, 0xFF
                                  SUB_DELAY1:
-000052 954a                      	DEC R20
-000053 3040                      	CPI R20, 0
+000052 955a                      	DEC R21
+000053 3050                      	CPI R21, 0
 000054 f7e9                      	BRNE SUB_DELAY1
 000055 ef4f                      	LDI R20, 0xFF
                                  SUB_DELAY2:
-000056 954a                      	DEC R20
-000057 3040                      	CPI R20, 0
+000056 955a                      	DEC R21
+000057 3050                      	CPI R21, 0
 000058 f7e9                      	BRNE SUB_DELAY2
-000059 ef4f                      	LDI R20, 0xFF
+000059 ef5f                      	LDI R21, 0xFF
                                  SUB_DELAY3:
-00005a 954a                      	DEC R20
-00005b 3040                      	CPI R20, 0
+00005a 955a                      	DEC R21
+00005b 3050                      	CPI R21, 0
 00005c f7e9                      	BRNE SUB_DELAY3
-00005d ef4f                      	LDI R20, 0xFF
+00005d ef5f                      	LDI R21, 0xFF
                                  SUB_DELAY4:
-00005e 954a                      	DEC R20
-00005f 3040                      	CPI R20, 0
+00005e 955a                      	DEC R21
+00005f 3050                      	CPI R21, 0
 000060 f7e9                      	BRNE SUB_DELAY4
 000061 9508                      	RET
                                  /*	LDI R19, 0xFF
@@ -1218,10 +1218,10 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  32 r17:   4 r18:  14 r19:   4 r20:  14 
-r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16:  32 r17:   4 r18:  14 r19:   4 r20:   3 
+r21:  11 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
-Registers used: 5 out of 35 (14.3%)
+Registers used: 6 out of 35 (17.1%)
 
 "ATmega328P" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 

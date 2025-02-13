@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm Thu Feb 13 10:51:21 2025
+AVRASM ver. 2.2.8  C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm Thu Feb 13 12:30:03 2025
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.inc'
@@ -1066,128 +1066,135 @@ C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Inc
 00000d b90b                      	OUT PORTD, R16	// Todos los bits del puerto D se encuentran apagados
                                  
                                  	// Inicializar variables
-00000e e013                      	LDI R17, 0x03	// Guarda el estado anterior de los botones (contador 1)
+00000e e71f                      	LDI R17, 0x7F	// Guarda el estado anterior de los botones (contador 1)
 00000f e020                      	LDI R18, 0x00	// Valor del contador 1
-000010 e03c                      	LDI R19, 0x0C	// Guarda el estado anterior de los botones (contador 2)
+000010 e73f                      	LDI R19, 0x7F	// Guarda el estado anterior de los botones (contador 2)
 000011 e040                      	LDI R20, 0x00	// Valor del contador 2
+000012 2777                      	CLR R23			// Valor del sumador
                                  
                                  // Loop Infinito
                                  MAIN:
-000012 940e 0017                 	CALL CONTADOR_1 // Llamar la subrutina del contador 1
-000014 940e 002a                 	CALL CONTADOR_2 // Llamar la subrutina del contador 2
-000016 cffb                      	RJMP MAIN		// Repetir ciclo
+                                 // Leer botones	
+000013 b106                      	IN R16, PINC	// Leer estados de botones
+000014 1710                      	CP R17, R16		// Comparar con estado previo
+000015 f3e9                      	BREQ MAIN	// Si no hay cambio, vuelve a leer
                                  	
-                                 // Subrutina para el contador 1 (PC0 y PC1)
-                                 CONTADOR_1:
-000017 b106                      	IN R16, PINC	// Leer estados de botones
-000018 7003                      	ANDI R16, 0x03	// Máscara para PC0 y PC1
+000016 940e 005d                 	CALL DELAY		// Retardo para antirrebote
+                                 	
+000018 b106                      	IN R16, PINC	// Leer estadode botones
 000019 1710                      	CP R17, R16		// Comparar con estado previo
-00001a f3e1                      	BREQ CONTADOR_1	// Si no hay cambio, vuelve a leer
+00001a f3c1                      	BREQ MAIN		// Si no hay cambio, vuelve a leer
                                  	
-00001b 940e 0051                 	CALL DELAY		// Retardo para antirrebote
-                                 	
-00001d b106                      	IN R16, PINC	// Leer estadode botones
-00001e 7003                      	ANDI R16, 0x03	// Máscara para PC0 y PC1
-00001f 1710                      	CP R17, R16		// Comparar con estado previo
-000020 f3b1                      	BREQ CONTADOR_1		// Si no hay cambio, vuelve a leer
+00001b 940e 005d                 	CALL DELAY		// Retardo para antirrebote
                                  
-000021 2f10                      	MOV R17, R16	// Guardar copia de estado actual
-000022 ff00                      	SBRS R16, 0		// Revisar si PC0 no se presiono
-000023 940e 003d                 	CALL INCREMENT1	// Llamar subrutina de incremento 1
-000025 ff01                      	SBRS R16, 1		// Si PC1 se presiono
-000026 940e 0042                 	CALL DECREMENT1	// Llamar subrutina de decremento 1
+00001d 2f10                      	MOV R17, R16	// Guardar copia de estado actual
+00001e ff00                      	SBRS R16, 0		// Revisar si PC0 no se presiono
+00001f 940e 002e                 	CALL INCREMENT1	// Llamar subrutina de incremento 1
+000021 ff01                      	SBRS R16, 1		// Si PC1 se presiono
+000022 940e 003a                 	CALL DECREMENT1	// Llamar subrutina de decremento 1
+000024 ff02                      	SBRS R16, 2		// Si PC2 se presiono
+000025 940e 0046                 	CALL INCREMENT2 // Llamar subrutina de incremento 2
+000027 ff03                      	SBRS R16, 3		// Revisar si PC3 no se presiono
+000028 940e 004d                 	CALL DECREMENT2	// Llamar subrutina de decremento 2
                                  
-000028 b925                      	OUT PORTB, R18	// Mostrar el contador en los LEDs
+                                 	// Verificar el botón de suma
+00002a 9b34                      	SBIS PINC, 4	// Revisar si PC4 no se presiono
                                  
-                                 FIN_CONTADOR1:
-000029 9508                      	RET				// Regresa a Main
+00002b 940e 0054                 	CALL SUMA		// Se llama a la subrutina de suma
                                  
-                                 // Subrutina para el contador 2 (PC2 y PC3)
-                                 CONTADOR_2:
-00002a b106                      	IN R16, PINC	// Leer estados de botones
-00002b 700c                      	ANDI R16, 0x0C	// Máscara para PC2 y PC3
-00002c 1730                      	CP R19, R16		// Compara con estado previo
-00002d f3e1                      	BREQ CONTADOR_2 // Si no hay cambio, vuelve a leer
+00002d cfe5                      	RJMP MAIN
                                  
-00002e 940e 0051                 	CALL DELAY		// Retardo para antirrebote
-                                 
-000030 b106                      	IN R16, PINC	// Leer estados de botones
-000031 700c                      	ANDI R16, 0x0C	// Máscara para PC2 y PC3
-000032 1730                      	CP R19, R16		// Compara con estado previo
-000033 f3b1                      	BREQ CONTADOR_2 // Si no hay cambio, vuelve a leer
-                                 
-000034 2f30                      	MOV R19, R16	// Guardar copia de estado actual
-000035 ff02                      	SBRS R16, 2		// Si PC2 se presiono
-000036 940e 0047                 	CALL INCREMENT2 // Llamar subrutina de incremento 2
-000038 ff03                      	SBRS R16, 3		// Revisar si PC3 no se presiono
-000039 940e 004c                 	CALL DECREMENT2	// Llamar subrutina de decremento 2
-                                 
-00003b b94b                      	OUT PORTD, R20	// Mostrar el contador en los LEDs
-                                 
-                                 FIN_CONTADOR2:
-00003c 9508                      	RET				// Regresa a Main
-                                 
-                                 // Logica Contador 1
                                  // Subrutina para incrementar el contador 1
                                  INCREMENT1:
-00003d 9523                      	INC R18			// Incrementra contador 1
-00003e 3120                      	CPI R18, 0x10 
-00003f f409                      	BRNE NO_CARRY1	// Si no hubo overflow, continuar
-000040 e020                      	LDI	R18, 0x00	// Si hubo carry, reiniciar contador 1 a 0
+00002e 9523                      	INC R18			// Incrementra contador 1
+00002f 3120                      	CPI R18, 0x10 
+000030 f409                      	BRNE NO_CARRY1	// Si no hubo overflow, continuar
+000031 e020                      	LDI	R18, 0x00	// Si hubo carry, reiniciar contador 1 a 0
                                  NO_CARRY1:
-000041 9508                      	RET
+000032 2f62                      	MOV R22, R18	// Se guarda en otro registro para poder modificarlo
+000033 0f66                      	LSL R22			// Se corre R18 4 espacios
+000034 0f66                      	LSL R22
+000035 0f66                      	LSL R22
+000036 0f66                      	LSL R22
+000037 2b64                      	OR	R22, R20	// Unir con el contador 2
+000038 b96b                      	OUT PORTD, R22	// Mostrar en LEDs
+000039 9508                      	RET
                                  
                                  // Subrutina para decrementar el contador 1
                                  DECREMENT1:
-000042 952a                      	DEC R18			// Decrementar contador 1
-000043 3f2f                      	CPI R18, 0xFF	// Comprobar si se generó borrow
-000044 f409                      	BRNE NO_BORROW1	// Si no hubo borrow
-000045 e02f                      	LDI R18, 0x0F	// Si hubo borrow, el contador 1 decrementa
+00003a 952a                      	DEC R18			// Decrementar contador 1
+00003b 3f2f                      	CPI R18, 0xFF	// Comprobar si se generó borrow
+00003c f409                      	BRNE NO_BORROW1	// Si no hubo borrow
+00003d e02f                      	LDI R18, 0x0F	// Si hubo borrow, el contador 1 decrementa
                                  NO_BORROW1:
-000046 9508                      	RET
+00003e 2f62                      	MOV R22, R18	// Se guarda en otro registro para poder modificarlo
+00003f 0f66                      	LSL R22			// Se corre R18 4 espacios
+000040 0f66                      	LSL R22
+000041 0f66                      	LSL R22
+000042 0f66                      	LSL R22
+000043 2b64                      	OR	R22, R20	// Unir con el contador 2
+000044 b96b                      	OUT PORTD, R22	// Mostrar en LEDs
+000045 9508                      	RET
                                  
                                  // Logica Contador 2
                                  // Subrutina para incrementar el contador 2
                                  INCREMENT2:
-000047 9543                      	INC R20			// Incrementra contador 2
-000048 3140                      	CPI R20, 0x10 
-000049 f409                      	BRNE NO_CARRY2	// Si no hubo overflow, continuar
-00004a e040                      	LDI	R20, 0x00	// Si hubo carry, reiniciar contador 2 a 0
+000046 9543                      	INC R20			// Incrementra contador 2
+000047 3140                      	CPI R20, 0x10 
+000048 f409                      	BRNE NO_CARRY2	// Si no hubo overflow, continuar
+000049 e040                      	LDI	R20, 0x00	// Si hubo carry, reiniciar contador 2 a 0
                                  NO_CARRY2:
-00004b 9508                      	RET
+00004a 2f64                      	MOV R22, R20	// Se guarda en otro registro para poder modificarlo
+00004b b96b                      	OUT PORTD, R22	// Mostrar en LEDs
+00004c 9508                      	RET
                                  
                                  // Subrutina para decrementar el contador 2
                                  DECREMENT2:
-00004c 954a                      	DEC R20			// Decrementar contador 2
-00004d 3f4f                      	CPI R20, 0xFF	// Comprobar si se generó borrow
-00004e f409                      	BRNE NO_BORROW2	// Si no hubo borrow
-00004f e04f                      	LDI R20, 0x0F	// Si hubo borrow, el contador 2 decrementa
+00004d 954a                      	DEC R20			// Decrementar contador 2
+00004e 3f4f                      	CPI R20, 0xFF	// Comprobar si se generó borrow
+00004f f409                      	BRNE NO_BORROW2	// Si no hubo borrow
+000050 e04f                      	LDI R20, 0x0F	// Si hubo borrow, el contador 2 decrementa
                                  NO_BORROW2:
-000050 9508                      	RET
+000051 2f64                      	MOV R22, R20	// Se guarda en otro registro para poder modificarlo
+000052 b96b                      	OUT PORTD, R22	// Mostrar en LEDs
+000053 9508                      	RET
+                                 
+                                 // Subrutina para el botón de sumador
+                                 SUMA:
+000054 2f72                      	MOV R23, R18	// Se guarda en otro registro para modificarlo
+000055 0f74                      	ADD R23, R20	// Se suman los registros
+000056 3170                      	CPI R23, 0X10	// Comprobar si se genero Carry
+000057 f419                      	BRNE NO_CARRYS	// Si no hubo overflow, continuar
+000058 e170                      	LDI R23, 0X10	// Encender PB4 si hay overflow
+000059 b975                      	OUT PORTB, R23	// Mostrar en LEDs
+00005a 9508                      	RET
+                                 NO_CARRYS:
+00005b b975                      	OUT PORTB, R23	// Mostrar resultado
+00005c 9508                      	RET
                                  
                                  // Subrutina de retardo para antirrebote
                                  DELAY:
-000051 ef5f                      	LDI R21, 0xFF
-                                 SUB_DELAY1:
-000052 955a                      	DEC R21
-000053 3050                      	CPI R21, 0
-000054 f7e9                      	BRNE SUB_DELAY1
-000055 ef5f                      	LDI R21, 0xFF
-                                 SUB_DELAY2:
-000056 955a                      	DEC R21
-000057 3050                      	CPI R21, 0
-000058 f7e9                      	BRNE SUB_DELAY2
-000059 ef5f                      	LDI R21, 0xFF
-                                 SUB_DELAY3:
-00005a 955a                      	DEC R21
-00005b 3050                      	CPI R21, 0
-00005c f7e9                      	BRNE SUB_DELAY3
 00005d ef5f                      	LDI R21, 0xFF
-                                 SUB_DELAY4:
+                                 SUB_DELAY1:
 00005e 955a                      	DEC R21
 00005f 3050                      	CPI R21, 0
-000060 f7e9                      	BRNE SUB_DELAY4
-000061 9508                      	RET
+000060 f7e9                      	BRNE SUB_DELAY1
+000061 ef5f                      	LDI R21, 0xFF
+                                 SUB_DELAY2:
+000062 955a                      	DEC R21
+000063 3050                      	CPI R21, 0
+000064 f7e9                      	BRNE SUB_DELAY2
+000065 ef5f                      	LDI R21, 0xFF
+                                 SUB_DELAY3:
+000066 955a                      	DEC R21
+000067 3050                      	CPI R21, 0
+000068 f7e9                      	BRNE SUB_DELAY3
+000069 ef5f                      	LDI R21, 0xFF
+                                 SUB_DELAY4:
+00006a 955a                      	DEC R21
+00006b 3050                      	CPI R21, 0
+00006c f7e9                      	BRNE SUB_DELAY4
+00006d 9508                      	RET
                                  /*	LDI R19, 0xFF
                                  SUB_DELAY5:
                                  	DEC R19
@@ -1218,37 +1225,37 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  32 r17:   4 r18:   8 r19:   4 r20:   8 
-r21:  12 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16:  23 r17:   4 r18:  10 r19:   1 r20:  12 
+r21:  12 r22:  18 r23:   7 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
-Registers used: 6 out of 35 (17.1%)
+Registers used: 8 out of 35 (22.9%)
 
 "ATmega328P" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
-andi  :   4 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   4 brge  :   0 brhc  :   0 
+.lds  :   0 .sts  :   0 adc   :   0 add   :   1 adiw  :   0 and   :   0 
+andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   2 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   8 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   0 call  :   8 cbi   :   0 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
-clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   4 cpc   :   0 
-cpi   :   8 cpse  :   0 dec   :   6 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   4 inc   :   2 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :  18 lds   :   0 lpm   :   0 lsl   :   0 
-lsr   :   0 mov   :   2 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :  10 pop   :   0 
+brne  :   9 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :   7 cbi   :   0 cbr   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   1 cls   :   0 
+clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   2 cpc   :   0 
+cpi   :   9 cpse  :   0 dec   :   6 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   2 inc   :   2 jmp   :   0 
+ld    :   0 ldd   :   0 ldi   :  19 lds   :   0 lpm   :   0 lsl   :   8 
+lsr   :   0 mov   :   6 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
+neg   :   0 nop   :   0 or    :   2 ori   :   0 out   :  14 pop   :   0 
 push  :   0 rcall :   0 ret   :   7 reti  :   0 rjmp  :   1 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   1 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   4 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   0 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 15 out of 113 (13.3%)
+Instructions used: 19 out of 113 (16.8%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0000c4    196      0    196   32768   0.6%
+[.cseg] 0x000000 0x0000dc    220      0    220   32768   0.7%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

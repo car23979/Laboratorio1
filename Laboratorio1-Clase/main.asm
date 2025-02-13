@@ -67,7 +67,7 @@ MAIN:
 	CALL DECREMENT2	// Llamar subrutina de decremento 2
 
 	// Verificar el botón de suma
-	SBRS PINC, 4	// Revisar si PC4 no se presiono
+	SBIS PINC, 4	// Revisar si PC4 no se presiono
 
 	CALL SUMA		// Se llama a la subrutina de suma
 

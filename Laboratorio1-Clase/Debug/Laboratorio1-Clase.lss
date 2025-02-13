@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm Thu Feb 13 08:29:15 2025
+AVRASM ver. 2.2.8  C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm Thu Feb 13 10:28:09 2025
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.inc'
@@ -1066,9 +1066,9 @@ C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm(9): Inc
 00000d b90b                      	OUT PORTD, R16	// Todos los bits del puerto D se encuentran apagados
                                  
                                  	// Inicializar variables
-00000e e71f                      	LDI R17, 0x7F	// Guarda el estado anterior de los botones (contador 1)
+00000e e013                      	LDI R17, 0x03	// Guarda el estado anterior de los botones (contador 1)
 00000f e020                      	LDI R18, 0x00	// Valor del contador 1
-000010 e73f                      	LDI R19, 0x7F	// Guarda el estado anterior de los botones (contador 2)
+000010 e03c                      	LDI R19, 0x0C	// Guarda el estado anterior de los botones (contador 2)
 000011 e040                      	LDI R20, 0x00	// Valor del contador 2
                                  
                                  // Loop Infinito

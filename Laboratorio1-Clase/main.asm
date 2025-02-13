@@ -101,18 +101,18 @@ FIN_CONTADOR2:
 INCREMENT1:
 	INC R18			// Incrementra contador
 	CPI R18, 0x10 
-	BRNE NO_CARRY	// Si no hubo overflow, continuar
+	BRNE NO_CARRY1	// Si no hubo overflow, continuar
 	LDI	R18, 0x00	// Si hubo carry, reiniciar contador a 0
-NO_CARRY:
+NO_CARRY1:
 	RET
 
 // Subrutina para decrementar el contador
 DECREMENT1:
 	DEC R18			// Decrementar contador
 	CPI R18, 0xFF	// Comprobar si se generó borrow
-	BRNE NO_BORROW	// Si no hubo borrow
+	BRNE NO_BORROW1	// Si no hubo borrow
 	LDI R18, 0x0F	// Si hubo borrow, el contador decrementa
-NO_BORROW:
+NO_BORROW1:
 	RET
 
 // Subrutina de retardo para antirrebote

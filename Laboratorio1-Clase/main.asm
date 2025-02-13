@@ -67,7 +67,9 @@ CONTADOR_1:
 	CALL DECREMENT1	// Llamar subrutina de decremento1
 
 	OUT PORTB, R18	// Mostrar el contador en los LEDs
-	RJMP MAIN		// Repetir el ciclo
+
+FIN_CONTADOR1:
+	RET				// Regresa a Main
 
 // Subrutina para incrementar el contador
 INCREMENT1:

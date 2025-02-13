@@ -115,6 +115,8 @@ DECREMENT1:
 NO_BORROW1:
 	RET
 
+// Logica Contador 2
+
 // Subrutina de retardo para antirrebote
 DELAY:
 	LDI R20, 0xFF

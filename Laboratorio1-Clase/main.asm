@@ -112,6 +112,8 @@ INCREMENT2:
 	BRNE NO_CARRY2	// Si no hubo overflow, continuar
 	LDI	R20, 0x00	// Si hubo carry, reiniciar contador 2 a 0
 NO_CARRY2:
+	MOV R22, R20	// Se guarda en otro registro para poder modificarlo
+	OUT PORTD, R22	// Mostrar en LEDs
 	RET
 
 // Subrutina para decrementar el contador 2

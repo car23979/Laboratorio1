@@ -37,7 +37,7 @@ SETUP:
 	// Inicializar variables
 	LDI R17, 0x7F	// Guarda el estado anterior de los botones (contador 1)
 	LDI R18, 0x00	// Valor del contador 1
-	LDI R19, 0xFF	// Guarda el estado anterior de los botones (contador 2)
+	LDI R19, 0x7F	// Guarda el estado anterior de los botones (contador 2)
 	LDI R20, 0x00	// Valor del contador 2
 
 // Loop Infinito
@@ -136,25 +136,25 @@ NO_BORROW2:
 
 // Subrutina de retardo para antirrebote
 DELAY:
-	LDI R20, 0xFF
+	LDI R21, 0xFF
 SUB_DELAY1:
-	DEC R20
-	CPI R20, 0
+	DEC R21
+	CPI R21, 0
 	BRNE SUB_DELAY1
 	LDI R20, 0xFF
 SUB_DELAY2:
-	DEC R20
-	CPI R20, 0
+	DEC R21
+	CPI R21, 0
 	BRNE SUB_DELAY2
-	LDI R20, 0xFF
+	LDI R21, 0xFF
 SUB_DELAY3:
-	DEC R20
-	CPI R20, 0
+	DEC R21
+	CPI R21, 0
 	BRNE SUB_DELAY3
-	LDI R20, 0xFF
+	LDI R21, 0xFF
 SUB_DELAY4:
-	DEC R20
-	CPI R20, 0
+	DEC R21
+	CPI R21, 0
 	BRNE SUB_DELAY4
 	RET
 /*	LDI R19, 0xFF

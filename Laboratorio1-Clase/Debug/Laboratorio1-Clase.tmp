@@ -10,6 +10,7 @@
  <SOURCE_FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\M328PDEF.inc</FILE>
  </INCLUDED_FILES>
  <OBJECT_FILES>
   <FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\Debug\Laboratorio1-Clase.obj</FILE>
@@ -22,6 +23,24 @@
   <FILE>Laboratorio1-Clase.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <start><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>10</LINE></start>
+  <SETUP><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>21</LINE></SETUP>
+  <MAIN><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>44</LINE></MAIN>
+  <CONTADOR_1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>50</LINE></CONTADOR_1>
+  <CONTADOR_2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>75</LINE></CONTADOR_2>
+  <DELAY><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>138</LINE></DELAY>
+  <INCREMENT1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>101</LINE></INCREMENT1>
+  <DECREMENT1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>110</LINE></DECREMENT1>
+  <FIN_CONTADOR1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>71</LINE></FIN_CONTADOR1>
+  <INCREMENT2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>120</LINE></INCREMENT2>
+  <DECREMENT2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>129</LINE></DECREMENT2>
+  <FIN_CONTADOR2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>96</LINE></FIN_CONTADOR2>
+  <NO_CARRY1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>106</LINE></NO_CARRY1>
+  <NO_BORROW1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>115</LINE></NO_BORROW1>
+  <NO_CARRY2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>125</LINE></NO_CARRY2>
+  <NO_BORROW2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>134</LINE></NO_BORROW2>
+  <SUB_DELAY1><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>140</LINE></SUB_DELAY1>
+  <SUB_DELAY2><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>145</LINE></SUB_DELAY2>
+  <SUB_DELAY3><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>150</LINE></SUB_DELAY3>
+  <SUB_DELAY4><FILE>C:\Users\Admin\Documents\GitHub\Laboratorio1\Laboratorio1-Clase\main.asm</FILE><LINE>155</LINE></SUB_DELAY4>
  </LABELS>
 </ASSEMBLER_INFO>

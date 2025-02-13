@@ -61,10 +61,10 @@ CONTADOR_1:
 	BREQ CONTADOR_1		// Si no hay cambio, vuelve a leer
 
 	MOV R17, R16	// Guardar copia de estado actual
-	SBRS R16, 0		// Revisar si el bit 2 no se presiono
-	CALL INCREMENT	// Llamar subrutina de incremento
-	SBRS R16, 1		// Si el bit 3 se presiono
-	CALL DECREMENT	// Llamar subrutina de decremento
+	SBRS R16, 0		// Revisar si PC0 no se presiono
+	CALL INCREMENT1	// Llamar subrutina de incremento1
+	SBRS R16, 1		// Si PC1 se presiono
+	CALL DECREMENT1	// Llamar subrutina de decremento1
 
 	OUT PORTB, R18	// Mostrar el contador en los LEDs
 	RJMP MAIN		// Repetir el ciclo

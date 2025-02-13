@@ -74,14 +74,14 @@ FIN_CONTADOR1:
 // Subrutina para el contador 2 (PC2 y PC3)
 CONTADOR_2:
 	IN R16, PINC	// Leer estados de botones
-	ANDI R16, 0x03	// Máscara para PC2 y PC3
+	ANDI R16, 0x0C	// Máscara para PC2 y PC3
 	CP R19, R16		// Compara con estado previo
 	BREQ CONTADOR_2 // Si no hay cambio, vuelve a leer
 
 	CALL DELAY		// Retardo para antirrebote
 
 	IN R16, PINC	// Leer estados de botones
-	ANDI R16, 0x03	// Máscara para PC2 y PC3
+	ANDI R16, 0x0C	// Máscara para PC2 y PC3
 	CP R19, R16		// Compara con estado previo
 	BREQ CONTADOR_2 // Si no hay cambio, vuelve a leer
 
